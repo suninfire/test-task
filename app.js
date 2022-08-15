@@ -1,5 +1,5 @@
 const express = require('express');
-const users = require('./dataBase/users');
+
 const fileServices = require('./services/file.services');
 
 const app = express();
@@ -8,23 +8,36 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.get('/',(req,res) => {
-res.json('Hello')
+  res.json('Hello')
 })
 
 app.get('/users',async (req,res) => {
-    let usersFromService = await fileServices.getUsers();
-    res.json(usersFromService)
+    const usersFromService = await fileServices.getUsers();
+    res.json(usersFromService);
+});
+
+app.post('/users',async (req,res) =>{
+    const {name,age} = req.body;
+
+    if (Number.isNaN(+age) || age <= 0){
+        res.status(400).json('wrong user age');
+        return;
+    }
+
+    const user = await fileServices.insertUser({name,age})
+
+    res.status(201).json(user);
 })
 
-app.get('/users/:userId',(req,res) => {
+app.get('/users/:userId',async (req,res) => {
      const {userId} = req.params
 
-    if (Number.isNaN(+userId) || +userId <= 0){
+    if (Number.isNaN(+userId) || +userId < 0){
         res.status(400).json('wrong user id');
         return;
     }
 
-    const user = users[userId];
+    const user = await fileServices.getOneUser(+userId);
 
     if (!user){
         res.status(404).json('user not found');
@@ -34,20 +47,44 @@ app.get('/users/:userId',(req,res) => {
      res.json(user)
 })
 
-app.post('/users',(req,res) =>{
-    const {name,age,gender} = req.body;
-    console.log(name,age,gender)
+app.put('/users/:userId',async (req,res) => {
+    const {userId} = req.params;
+    const {name,age} = req.body;
 
-    if (Number.isNaN(+age) || age <= 0){
-        res.status(400).json('wrong user age');
-        return;
+    if (Number.isNaN(+userId) || +userId < 0) {
+        res.status(400).json('wrong user id');
     }
 
-    users.push({name,age,gender});
+    const userObject = {};
+    if (age) userObject.age = age;
+    if (name) userObject.name = name;
 
-    res.status(201).json('ok');
-})
+    const user = await fileServices.updateUser(+userId,userObject);
+
+    if (!user){
+        res.status(404).json('user not found');
+    }
+
+       res.status(201).json(user);
+});
+
+app.delete('/users/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    if (Number.isNaN(+userId) || +userId < 0) {
+        res.status(400).json('wrong user id');
+    }
+
+    const user = await fileServices.deleteOneUser(+userId);
+
+    if (!user) {
+        res.status(404).json('user not found');
+    }
+
+    res.sendStatus(204);
+});
+
 
 app.listen(5000,() => {})
 
-//hw: delete user by is, update user by id
+//hw: delete user by id, update user by id
