@@ -26,7 +26,7 @@ const writer = async (users) => {
 }
 
 module.exports = {
-    getUsers: () => {
+    getUsers:  () => {
        return reader();
     },
 
@@ -73,6 +73,4 @@ module.exports = {
         await writer(users);
         return user;
     }
-
-
 }
