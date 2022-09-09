@@ -1,6 +1,7 @@
 const {ApiError} = require("../errors");
 const {statusCodes} = require("../constants");
 const {userService} = require("../services");
+const {User} = require("../dataBase");
 
 module.exports = {
     checkIsUserBodyValid: async (req,res,next) => {
@@ -42,6 +43,23 @@ module.exports = {
             const {userId} = req[from];
 
             const user = await userService.getOneById(userId);
+
+            if (!user) {
+                return next(new ApiError('user not found, check id',statusCodes.NOT_FOUND)) ;
+            }
+
+            req.user = user;
+            next();  //перекидає до наступного обробника
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    getUserDynamicly: (from = 'body', fieldName = 'userId',dbField = fieldName) => async (req,res,next) => {
+        try {
+            const fieldToSearch = req[from][fieldName];
+
+            const user = await User.findOne({[dbField]: fieldToSearch});
 
             if (!user) {
                 return next(new ApiError('user not found, check id',statusCodes.NOT_FOUND)) ;

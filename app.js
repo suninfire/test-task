@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 
 const { PORT, MONGO_URL} = require('./сonfigs/config');
-const {carRouter,userRouter} = require('./routes');
+const {authRouter,carRouter,userRouter} = require('./routes');
 const {mainErrorHandler} = require("./errors");
 
 
@@ -14,10 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-
-app.use('/users',userRouter);
-//при запиті на /users перейде в userRouter
-
+app.use('/auth',authRouter)
+app.use('/users',userRouter); //при запиті на /users перейде в userRouter
 app.use('/cars',carRouter);
 
 app.use('*', (req,res,next) =>{
