@@ -1,4 +1,4 @@
-const {authService} = require("../services");
+const {tokenService, authService} = require("../services");
 module.exports = {
 
     login: async (req,res,next) => {
@@ -6,16 +6,34 @@ module.exports = {
             const { password } = req.body;
             const { password: hashPassword, _id } = req.user;
 
-            await authService.comparePasswords(password,hashPassword);
+            await tokenService.comparePasswords(password,hashPassword);
 
-           const authToken = authService.createAuthToken({_id});
+           const authToken = tokenService.createAuthToken({_id});
 
-
+           await authService.saveTokens({...authToken, user: _id})
 
             res.json({
                 ...authToken,
                 user: req.user
             });
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    refresh: async (req,res,next) => {
+        try {
+
+            const { user, refresh_token } = req.tokenInfo;
+
+            await authService.deleteOneByParams({refresh_token});
+
+
+            const authToken = tokenService.createAuthToken({_id: user});
+
+            const newTokens = await authService.saveTokens({...authToken, user});
+
+            res.json(newTokens);
         } catch (e) {
             next(e);
         }

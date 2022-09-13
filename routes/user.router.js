@@ -1,7 +1,7 @@
 const {Router} = require('express');
 
 const { userController } = require('../controllers');
-const { commonMdlwr,userMdlwr } = require('../middlewares');
+const { commonMdlwr,userMdlwr, authMdlwr} = require('../middlewares');
 
 const userRouter = Router();
 //екземпляр Роутера
@@ -27,6 +27,7 @@ userRouter.get(
 
 userRouter.put('/:userId',
     commonMdlwr.checkIsIdValid('userId' ),
+    authMdlwr.checkIsAccessToken,
     userMdlwr.isUserPresent(),
     userMdlwr.checkIsEmailUniq,
     userController.updateUserById
@@ -35,6 +36,7 @@ userRouter.put('/:userId',
 userRouter.delete(
     '/:userId',
     commonMdlwr.checkIsIdValid('userId' ),
+    authMdlwr.checkIsAccessToken,
     userMdlwr.isUserPresent(),
     userController.deleteUserById
 );

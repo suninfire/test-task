@@ -19,7 +19,7 @@ module.exports = {
     },
 
     updateUserById(userId, newUserObject) {
-        return User.updateOne({_id: userId}, newUserObject, {new: true});  // new:true - returned new object(user)
+        return User.findOneAndUpdate({_id: userId}, newUserObject, {new: true});  // new:true - returned new object(user)
     },
 
     deleteUserById(userId) {
