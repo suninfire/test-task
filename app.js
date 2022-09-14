@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use('/auth',authRouter)
+app.use('/auth',authRouter);
 app.use('/users',userRouter); //при запиті на /users перейде в userRouter
 app.use('/cars',carRouter);
 

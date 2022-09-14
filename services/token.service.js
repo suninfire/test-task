@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const {ApiError} = require("../errors");
-const {statusCodes, tokenTypeEnum} = require("../constants");
 const {config} = require('../сonfigs');
+const {statusCodes, tokenTypeEnum} = require("../constants");
+
 
 module.exports = {
     hashPassword: (password) => bcrypt.hash(password, 10),    //бібліотека хешує пароль і повертає захешований
@@ -16,8 +17,8 @@ module.exports = {
     },
 
     createAuthToken: (payload) => {      // payload це ані які будуть зашифровані, по дефолту пустий обєкт
-        const access_token = jwt.sign(payload, config.ACCESS_SECRET_WORD, {expiresIn: '60s'});   //payload зашифрується з допомогою слова ACCESS_WORD
-        const refresh_token = jwt.sign(payload, config.REFRESH_SECRET_WORD, {expiresIn: '30d'});   //payload зашифрується з допомогою слова REFRESH_WORD
+        const access_token = jwt.sign(payload, config.ACCESS_SECRET_WORD, {expiresIn: config.ACCESS_TOKEN_LIFETIME});   //payload зашифрується з допомогою слова ACCESS_WORD
+        const refresh_token = jwt.sign(payload, config.REFRESH_SECRET_WORD, {expiresIn: config.REFRESH_TOKEN_LIFETIME});   //payload зашифрується з допомогою слова REFRESH_WORD
 
         return {
             access_token,

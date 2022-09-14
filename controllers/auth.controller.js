@@ -1,4 +1,5 @@
-const {tokenService, authService} = require("../services");
+const {authService,tokenService} = require("../services");
+const {statusCodes} = require("../constants");
 module.exports = {
 
     login: async (req,res,next) => {
@@ -16,6 +17,20 @@ module.exports = {
                 ...authToken,
                 user: req.user
             });
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    logout: async (req, res, next) => {
+        try {
+            const {user, access_token} = req.tokenInfo;
+
+            await authService.deleteOneByParams({user: user._id, access_token});
+
+            // Auth.deleteMany({user: _id});
+
+            res.sendStatus(statusCodes.NO_CONTENT);
         } catch (e) {
             next(e);
         }
