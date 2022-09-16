@@ -1,4 +1,14 @@
+
 {
+  "name": "mar-2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "lint": "eslint --fix --ext .js ."
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
@@ -8,6 +18,8 @@
     "mongoose": "^6.5.5"
   },
   "devDependencies": {
-    
+    "nodemon": "^2.0.19",
+    "eslint": "^8.23.1",
+    "eslint-plugin-node": "^11.1.0"
   }
 }

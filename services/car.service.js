@@ -2,23 +2,27 @@ const {Car}= require('../dataBase');
 
 module.exports = {
 
-    createCar(carObject) {
-        return Car.create(carObject);
-    },
+  createCar(carObject) {
+    return Car.create(carObject);
+  },
 
-    getOneByParams(filter) {
-        return Car.findOne(filter);
-    },
+  getOneByParams(filter) {
+    return Car.findOne(filter);
+  },
 
-    getOneById(id) {
-        return Car.findById(id).populate('user');
-    },
+  getCarsByParams(filter) {
+    return Car.find(filter);
+  },
 
-    updateUserById(carId, newCarObject) {
-        return Car.updateOne({_id: carId}, newCarObject, {new: true});
-    },
+  getOneById(id) {
+    return Car.findById(id).populate('user');
+  },
 
-    deleteCarById(carId) {
-        return Car.deleteOne({_id: carId});
-    }
-}
+  updateUserById(carId, newCarObject) {
+    return Car.updateOne({_id: carId}, newCarObject, {new: true});
+  },
+
+  deleteCarById(carId) {
+    return Car.deleteOne({_id: carId});
+  }
+};

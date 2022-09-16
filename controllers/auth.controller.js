@@ -1,56 +1,56 @@
-const {authService,tokenService} = require("../services");
-const {statusCodes} = require("../constants");
+const {authService,tokenService} = require('../services');
+const {statusCodes} = require('../constants');
 module.exports = {
 
-    login: async (req,res,next) => {
-        try {
-            const { password } = req.body;
-            const { password: hashPassword, _id } = req.user;
+  login: async (req,res,next) => {
+    try {
+      const { password } = req.body;
+      const { password: hashPassword, _id } = req.user;
 
-            await tokenService.comparePasswords(password,hashPassword);
+      await tokenService.comparePasswords(password,hashPassword);
 
-           const authToken = tokenService.createAuthToken({_id});
+      const authToken = tokenService.createAuthToken({_id});
 
-           await authService.saveTokens({...authToken, user: _id})
+      await authService.saveTokens({...authToken, user: _id});
 
-            res.json({
-                ...authToken,
-                user: req.user
-            });
-        } catch (e) {
-            next(e);
-        }
-    },
-
-    logout: async (req, res, next) => {
-        try {
-            const {user, access_token} = req.tokenInfo;
-
-            await authService.deleteOneByParams({user: user._id, access_token});
-
-            // Auth.deleteMany({user: _id});
-
-            res.sendStatus(statusCodes.NO_CONTENT);
-        } catch (e) {
-            next(e);
-        }
-    },
-
-    refresh: async (req,res,next) => {
-        try {
-
-            const { user, refresh_token } = req.tokenInfo;
-
-            await authService.deleteOneByParams({refresh_token});
-
-
-            const authToken = tokenService.createAuthToken({_id: user});
-
-            const newTokens = await authService.saveTokens({...authToken, user});
-
-            res.json(newTokens);
-        } catch (e) {
-            next(e);
-        }
+      res.json({
+        ...authToken,
+        user: req.user
+      });
+    } catch (e) {
+      next(e);
     }
-}
+  },
+
+  logout: async (req, res, next) => {
+    try {
+      const {user, access_token} = req.tokenInfo;
+
+      await authService.deleteOneByParams({user: user._id, access_token});
+
+      // Auth.deleteMany({user: _id});
+
+      res.sendStatus(statusCodes.NO_CONTENT);
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  refresh: async (req,res,next) => {
+    try {
+
+      const { user, refresh_token } = req.tokenInfo;
+
+      await authService.deleteOneByParams({refresh_token});
+
+
+      const authToken = tokenService.createAuthToken({_id: user});
+
+      const newTokens = await authService.saveTokens({...authToken, user});
+
+      res.json(newTokens);
+    } catch (e) {
+      next(e);
+    }
+  }
+};
