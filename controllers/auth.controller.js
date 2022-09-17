@@ -1,17 +1,22 @@
-const {authService,tokenService} = require('../services');
-const {statusCodes} = require('../constants');
+const {authService,tokenService, emailService} = require('../services');
+const {statusCodes, emailActionEnum} = require('../constants');
+
 module.exports = {
 
   login: async (req,res,next) => {
     try {
       const { password } = req.body;
-      const { password: hashPassword, _id } = req.user;
+
+
+      const { password: hashPassword, _id, name } = req.user;
 
       await tokenService.comparePasswords(password,hashPassword);
 
       const authToken = tokenService.createAuthToken({_id});
 
       await authService.saveTokens({...authToken, user: _id});
+
+      await emailService.sendEmail('shabl.sergey@gmail.com', emailActionEnum.WELCOME, { userName: name} );
 
       res.json({
         ...authToken,
