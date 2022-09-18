@@ -46,7 +46,7 @@ module.exports = {
       const user = await User.findOne({[dbField]: fieldToSearch});
 
       if (!user) {
-        return next(new ApiError('user not found, check id',statusCodes.NOT_FOUND)) ;
+        return next(new ApiError('user not found',statusCodes.NOT_FOUND)) ;
       }
 
       req.user = user;

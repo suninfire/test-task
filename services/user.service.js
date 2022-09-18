@@ -6,17 +6,15 @@ module.exports = {
     return User.find(filter);
   },
 
-  createUser(userObject) {
-    return User.create(userObject);
-  },
-
   getOneByParams(filter) {
     return User.findOne(filter); //  filter is object
   },
 
-  getOneById(id) {
-    return User.findById(id).select(['+cars'])
-      .populate('cars'); // id is params (userId)
+  getOneById(id) { // id is params (userId)
+    return User
+      .findById(id)
+      .select('+cars')
+      .populate('cars');
   },
 
   updateUserById(userId, newUserObject) {
