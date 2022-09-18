@@ -46,8 +46,18 @@ const loginUserValidator = Joi.object({
   password: passwordValidator.required().error(new ApiError('Wrong email or password', statusCodes.BAD_REQUEST)) ,
 });
 
+const userEmailValidator = Joi.object({
+  email: emailValidator.required().error(new ApiError('Wrong email', statusCodes.BAD_REQUEST)),
+});
+
+const userPasswordValidator = Joi.object({
+  password: passwordValidator.required().error(new ApiError('Wrong password', statusCodes.BAD_REQUEST)) ,
+});
+
 
 module.exports = {
+  userEmailValidator,
+  userPasswordValidator,
   newUserValidator,
   updateUserValidator,
   loginUserValidator

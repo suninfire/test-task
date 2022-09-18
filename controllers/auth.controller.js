@@ -1,4 +1,4 @@
-const {authService,tokenService, emailService, actionTokenService, userService} = require('../services');
+const {authService,tokenService, emailService, actionTokenService, userService, previousPasswordService} = require('../services');
 const {statusCodes, emailActionEnum, tokenTypeEnum, constant} = require('../constants');
 const {FRONTEND_URL} = require('../сonfigs/config');
 
@@ -33,8 +33,6 @@ module.exports = {
       const {user, access_token} = req.tokenInfo;
 
       await authService.deleteOneByParams({user: user._id, access_token});
-
-      // Auth.deleteMany({user: _id});
 
       res.sendStatus(statusCodes.NO_CONTENT);
     } catch (e) {
@@ -75,7 +73,7 @@ module.exports = {
 
       });
 
-      res.json('Ok');
+      res.json({actionToken});
     } catch (e) {
       next(e);
     }
@@ -87,11 +85,15 @@ module.exports = {
       const { password } = req.body;
       const token = req.get(constant.AUTHORISATION);
 
+      await previousPasswordService.savePassword({ password: user.password, user: user._id});
+
       await authService.deleteMany({ user: user._id});
       await actionTokenService.deleteOne({ token });
 
       const hashPassword = await tokenService.hashPassword(password);
-      await userService.updateUserById(user._id, {password: hashPassword});
+      await userService.updateUserById( user._id, {password: hashPassword});
+
+      res.json('your password has been changed');
 
     } catch (e) {
       next(e);
