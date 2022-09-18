@@ -20,6 +20,4 @@ module.exports = {
   deleteMany(filter) {
     return Auth.deleteMany(filter);
   },
-
-
 };

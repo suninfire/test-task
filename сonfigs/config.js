@@ -10,5 +10,7 @@ module.exports = {
   NO_REPLY_EMAIL: process.env.NO_REPLY_EMAIL || 'example@gmail.com',
   NO_REPLY_PASSWORD: process.env.NO_REPLY_PASSWORD || 'testTest11',
 
-  FRONTEND_URL: process.env.FRONTEND_URL || 'example.com'
+  FRONTEND_URL: process.env.FRONTEND_URL || 'example.com',
+
+  ACTION_TOKEN_SECRET: process.env.ACTION_TOKEN_SECRET || 'A_T_S',
 };
