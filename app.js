@@ -1,7 +1,9 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 require('dotenv').config(); //беремо змінні з дот енв і пишемо їх в змінні середовища
 const mongoose = require('mongoose');
 const runCronJobs = require('./cron');
+const morgan = require('morgan');
 
 const { PORT, MONGO_URL } = require('./сonfigs/config');
 const {authRouter,carRouter,userRouter} = require('./routes');
@@ -10,12 +12,12 @@ const {mainErrorHandler} = require('./errors');
 const app = express();
 
 
-const morgan = require('morgan');
 app.use(morgan('dev'));  
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+app.use(fileUpload({}));
 
 app.use('/auth',authRouter);
 app.use('/users',userRouter); //при запиті на /users перейде в userRouter

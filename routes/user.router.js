@@ -1,7 +1,7 @@
 const {Router} = require('express');
 
 const { userController } = require('../controllers');
-const { commonMdlwr,userMdlwr, authMdlwr} = require('../middlewares');
+const { commonMdlwr,userMdlwr, authMdlwr, fileMdlwr} = require('../middlewares');
 const {newUserValidator, updateUserValidator} = require('../validators/user.validators');
 
 const userRouter = Router();
@@ -24,6 +24,14 @@ userRouter.get(
   commonMdlwr.checkIsIdValid('userId' ),
   userMdlwr.isUserPresent(),
   userController.getUserById
+);
+
+userRouter.post(
+  '/:userId/avatar',
+  commonMdlwr.checkIsIdValid('userId' ),
+  fileMdlwr.checkUploadedAvatar,
+  userMdlwr.isUserPresent(),
+  userController.uploadAvatar,
 );
 
 userRouter.put('/:userId',

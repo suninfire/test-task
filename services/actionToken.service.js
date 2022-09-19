@@ -1,17 +1,9 @@
 const {ActionToken} = require('../dataBase');
 module.exports = {
-    createActionToken: (dataToInsert) => {
-        return ActionToken.create(dataToInsert);
-    },
+  createActionToken: (dataToInsert) => ActionToken.create(dataToInsert),
 
-    getOneByParamsWithUser: (searchParams) => {
-        return ActionToken.findOne(searchParams).populate('user');
-    },
+  getOneByParamsWithUser: (searchParams) => ActionToken.findOne(searchParams).populate('user'),
 
-    deleteOne: (deleteParams) => {
-        return ActionToken.deleteOne(deleteParams);
-    },
-    deleteMany: (deleteParams) => {
-        return ActionToken.deleteMany(deleteParams);
-    },
+  deleteOne: (deleteParams) => ActionToken.deleteOne(deleteParams),
+  deleteMany: (deleteParams) => ActionToken.deleteMany(deleteParams),
 };

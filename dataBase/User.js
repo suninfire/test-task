@@ -1,6 +1,5 @@
 const { Schema, model} = require('mongoose');
 const tokenService = require('../services/token.service');
-const {hashPassword} = require('../services/token.service');
 
 const userSchema = new Schema ({
   // description of the scheme:
@@ -8,6 +7,7 @@ const userSchema = new Schema ({
   age: {type: Number, default: 18 },
   password:{type: String, required: true},
   email: { type: String, trim: true, lowercase: true, required:true, unique:true}, // lowercase all
+  avatar: { type: String, default: ' '},
   cars: {
     type: [Schema.Types.ObjectId],
     ref: 'car',
