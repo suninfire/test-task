@@ -1,17 +1,18 @@
 const express = require('express');
 require('dotenv').config(); //беремо змінні з дот енв і пишемо їх в змінні середовища
 const mongoose = require('mongoose');
-const morgan = require('morgan');
-
-const { PORT, MONGO_URL} = require('./сonfigs/config');
-const {authRouter,carRouter,userRouter} = require('./routes');
-const {mainErrorHandler} = require('./errors');
 const runCronJobs = require('./cron');
 
+const { PORT, MONGO_URL } = require('./сonfigs/config');
+const {authRouter,carRouter,userRouter} = require('./routes');
+const {mainErrorHandler} = require('./errors');
 
 const app = express();
 
-app.use(morgan('dev'));
+
+const morgan = require('morgan');
+app.use(morgan('dev'));  
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
