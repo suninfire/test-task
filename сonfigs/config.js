@@ -16,6 +16,7 @@ module.exports = {
 
   S3_BUCKET_NAME: process.env.S3_BUCKET_NAME ,
   S3_BUCKET_REGION: process.env.S3_BUCKET_REGION,
+  S3_BUCKET_URL: process.env.S3_BUCKET_URL,
   ACCESS_KEY_ID: process.env.ACCESS_KEY_ID,
   SECRET_ACCESS_KEY: process.env. SECRET_ACCESS_KEY,
 };

@@ -34,6 +34,22 @@ userRouter.post(
   userController.uploadAvatar,
 );
 
+userRouter.delete(
+  '/:userId/avatar/:imageId',
+  commonMdlwr.checkIsIdValid('userId' ),
+  commonMdlwr.checkIsIdValid('imageId' ),
+  authMdlwr.checkIsAccessToken,
+  userMdlwr.isUserPresent(),
+  userController.deleteImageById,
+);
+
+userRouter.get(
+  '/:userId/avatar',
+  commonMdlwr.checkIsIdValid('userId' ),
+  userMdlwr.isUserPresent(),
+  userController.getImages
+);
+
 userRouter.put('/:userId',
   commonMdlwr.checkIsIdValid('userId' ),
   commonMdlwr.checkIsBodyValid(updateUserValidator),
