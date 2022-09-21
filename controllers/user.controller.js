@@ -124,10 +124,9 @@ module.exports = {
 
   sendMessage: async (req, res, next) => {
     try {
-      const {phone,massage} = req.body;
-      console.log(massage);
+      const {phone,message} = req.body;
 
-      await smsService.sendSMS(phone,massage);
+      await smsService.sendSMS(phone,message);
 
       res.json('sms sent');
     } catch (e) {
