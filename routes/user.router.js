@@ -67,5 +67,10 @@ userRouter.delete(
   userController.deleteUserById
 );
 
+userRouter.post(
+  '/sendSMS',
+  userController.sendMessage
+);
+
 module.exports = userRouter;
 //експортувати як змінну, не як функцію

@@ -1,5 +1,5 @@
 const {statusCodes} = require('../constants');
-const {userService, s3Service, imageService} = require('../services');
+const {userService, s3Service, imageService, smsService} = require('../services');
 const {User} = require('../dataBase');
 const {ApiError} = require('../errors');
 
@@ -117,6 +117,19 @@ module.exports = {
       ]);
       
       res.json('image deleted');
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  sendMessage: async (req, res, next) => {
+    try {
+      const {phone,massage} = req.body;
+      console.log(massage);
+
+      await smsService.sendSMS(phone,massage);
+
+      res.json('sms sent');
     } catch (e) {
       next(e);
     }
