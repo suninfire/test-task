@@ -5,13 +5,21 @@ const path = require('path');
 const {config} = require('../сonfigs');
 const emailTemplatesObj = require('../emails');
 const {ApiError} = require('../errors');
+// const { applicantController} = require('../controllers');
+// const {Applicant} = require('../dataBase');
+// const {getAllApplicant} = require("../controllers/applicant.controller");
 
 
-const sendEmail = async (userMail, emailAction,locals ={}) => {
+// const {applicants} = applicantController.getAllApplicant();
+
+// const all = Applicant.find({level: 'junior'});
+// console.log(res.json(all));
+
+const sendEmail = async (emailAction,locals= {}) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: config.NO_REPLY_EMAIL, //sender's email
+      user: config.NO_REPLY_EMAIL,
       pass: config.NO_REPLY_PASSWORD,
     }
   });
@@ -28,11 +36,11 @@ const sendEmail = async (userMail, emailAction,locals ={}) => {
     throw new ApiError('Wrong template name', 500);
   }
   
-  const html = await templateParser.render(emailInfo.templateName, {...locals, frontendURL: config.FRONTEND_URL});
+  const html = await templateParser.render(emailInfo.templateName,{...locals});
 
   return transporter.sendMail({
-    from: 'No reply mar-2022 ', // sender's name
-    to: userMail ,
+    from: 'test test', // sender's name
+    to: 'n.suninfire@gmail.com',
     subject: emailInfo.subject,
     html
   });

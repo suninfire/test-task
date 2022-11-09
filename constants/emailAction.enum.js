@@ -1,5 +1,4 @@
 module.exports = {
-  ORDER_ARRIVED: 'order_arrived',
-  WELCOME: 'welcome',
-  FORGOT_PASSWORD: 'forgot_pass',
+  ADDED: 'position_added',
+  REMOVED: 'position_removed',
 };

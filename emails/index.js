@@ -1,18 +1,13 @@
 const {emailActionEnum} = require('../constants');
+
 module.exports = {
-  [emailActionEnum.WELCOME]: {
-    subject: 'Welcome',
-    templateName: 'welcome'
-  },
 
-  [emailActionEnum.FORGOT_PASSWORD]: {
-    subject: 'Forgot password',
-    templateName: 'forgot_pass'
+  [emailActionEnum.ADDED]: {
+    subject: 'position_added',
+    templateName: 'position_added'
   },
-
-  [emailActionEnum.ORDER_ARRIVED]: {
-    subject: 'Order arr',
-    templateName: 'order_arrived'
-  },
-
+  [emailActionEnum.REMOVED]: {
+    subject: 'position_removed',
+    templateName: 'position_removed'
+  }
 };

@@ -1,7 +1,6 @@
 module.exports = {
-  authMdlwr: require('./auth.middleware'),
+  applicantMdlwr: require('./applicant.middleware'),
   commonMdlwr: require('./common.middleware'),
-  carMdlwr: require('./car.middleware'),
-  fileMdlwr: require('./file.middleware'),
-  userMdlwr: require('./user.middleware')
+  positionMdlwr: require('./position.middleware'),
+
 };
