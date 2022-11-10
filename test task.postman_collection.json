@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "97527952-c28e-447b-bdf5-784a8e5bf3d7",
+		"name": "test task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22458335"
+	},
+	"item": [
+		{
+			"name": "positions",
+			"item": [
+				{
+					"name": "get all positions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/positions",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  positions by level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/positions/senior",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions",
+								"senior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  positions by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/positions/position/636a8109a2d438950323c835",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions",
+								"position",
+								"636a8109a2d438950323c835"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  positions by level and category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/positions/react/junior",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions",
+								"react",
+								"junior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create position",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\":\"javascript\",\r\n    \"level\":\"middle\",\r\n    \"company\":\"company D\",\r\n    \"japaneseRequired\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/positions",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update position by id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n        \"company\": \"company100\",\r\n        \"japaneseRequired\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/positions/636a1b7fac4cce02dffadb2f",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions",
+								"636a1b7fac4cce02dffadb2f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete position by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/positions/636d26defc17d03d79353cc5",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"positions",
+								"636d26defc17d03d79353cc5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "applicants",
+			"item": [
+				{
+					"name": "get all applicants",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/applicants",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"applicants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create applicant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shabl.sergii@gmail.com\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": true,\r\n        \"level\": \"middle\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/applicants",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"applicants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update applicant by id",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n         \"email\": \"shabl.serhii@gmail.com\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": true,\r\n        \"level\": \"middle\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5005/applicants/636d2670fc17d03d79353cbd",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"applicants",
+								"636d2670fc17d03d79353cbd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete applicant by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5005/applicants/636c1e469123c44d2b95cfa0",
+							"host": [
+								"localhost"
+							],
+							"port": "5005",
+							"path": [
+								"applicants",
+								"636c1e469123c44d2b95cfa0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

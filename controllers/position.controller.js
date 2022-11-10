@@ -69,6 +69,10 @@ module.exports = {
     try {
       const {positionId} = req.params;
 
+      const body = await Position.findOne({_id:positionId});
+
+      await emailService.sendEmail(emailActionEnum.REMOVED,body);
+
       await Position.deleteOne({positionId});
 
       res.sendStatus(statusCodes.NO_CONTENT);
