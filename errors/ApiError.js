@@ -4,7 +4,6 @@ class ApiError extends Error {
     this.status = status;
   }
 }
-
 module.exports = ApiError;
 
 

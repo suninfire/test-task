@@ -1,10 +1,10 @@
 const {statusCodes} = require('../constants');
-const {Applicant} = require('../dataBase');
+const {applicantService} = require('../services');
 
 module.exports = {
   getAllApplicant: async (req, res, next) => {
     try {
-      const applicants = await Applicant.find(req.body);
+      const applicants = await applicantService.getAll(req.body);
       res.json(applicants);
     } catch (e) {
       next(e);
@@ -13,7 +13,7 @@ module.exports = {
 
   createApplicant: async (req, res, next) => {
     try {
-      const applicant = await Applicant.create(req.body);
+      const applicant = await applicantService.createApplicant(req.body);
 
       res.status(statusCodes.CREATE).json(applicant);
     } catch (e) {
@@ -25,7 +25,7 @@ module.exports = {
     try {
       const {applicantId} = req.params;
 
-      const applicant = await Applicant.findOneAndUpdate({_id: applicantId}, req.body,{new: true});
+      const applicant = await applicantService.updateApplicant(applicantId, req.body);
 
       res.json(applicant);
     } catch (e) {
@@ -37,12 +37,11 @@ module.exports = {
     try {
       const {applicantId} = req.params;
 
-      await Applicant.deleteOne({applicantId});
+      await applicantService.deleteApplicant(applicantId);
 
       res.sendStatus(statusCodes.NO_CONTENT);
     } catch (e) {
       next(e);
     }
   },
-
 };

@@ -1,7 +1,8 @@
 const {Router} = require('express');
 
 const { applicantController } = require('../controllers');
-const { commonMdlwr,applicantMdlwr} = require('../middlewares');
+const { commonMdlwr} = require('../middlewares');
+const {newApplicantValidator,updateApplicantValidator} = require('../validators/applicant.validator');
 
 const applicantRouter = Router();
 
@@ -12,13 +13,14 @@ applicantRouter.get(
 
 applicantRouter.post(
   '/',
-  applicantMdlwr.checkIsApplicantBodyValid,
+  commonMdlwr.checkIsBodyValid(newApplicantValidator),
   applicantController.createApplicant
 );
 
 applicantRouter.put(
   '/:applicantId',
   commonMdlwr.checkIsIdValid('applicantId' ),
+  commonMdlwr.checkIsBodyValid(updateApplicantValidator),
   applicantController.updateApplicantById
 );
 

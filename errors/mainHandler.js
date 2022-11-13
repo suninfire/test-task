@@ -4,6 +4,6 @@ module.exports = (err, req, res, next) => {
     .status(err.status || 500)
     .json({
       message: err.message || 'Server error',
-      status: 999 // example field
+      status: 999
     });
 };

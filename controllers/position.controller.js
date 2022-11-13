@@ -1,30 +1,11 @@
 const {statusCodes,emailActionEnum} = require('../constants');
-const {Position} = require('../dataBase');
-const {emailService} = require('../services');
+const {positionService,emailService} = require('../services');
 
 module.exports = {
   getAllPositions: async (req, res, next) => {
     try {
-      const positions = await Position.find(req.body);
-
+      const positions = await positionService.getAll(req.query);
       res.json(positions);
-    } catch (e) {
-      next(e);
-    }
-  },
-
-  getPositionsByParams: async (req, res, next) => {
-    try {
-      const {category} = req.params;
-      const {level} = req.params;
-
-      if (category === undefined) {
-        const positionsByParams = await Position.find({level});
-        res.json(positionsByParams);
-      } else {
-        const positionsByParams = await Position.find({category, level});
-        res.json(positionsByParams);
-      }
     } catch (e) {
       next(e);
     }
@@ -33,7 +14,7 @@ module.exports = {
   getById: async (req, res, next) => {
     try {
       const {positionId} = req.params;
-      const positionById = await Position.findById({_id:positionId});
+      const positionById = await positionService.getById(positionId);
 
       res.json(positionById);
     } catch (e) {
@@ -41,9 +22,9 @@ module.exports = {
     }
   },
 
-  createPosition: async (req, res, next) => {
+  createNewPosition: async (req, res, next) => {
     try {
-      const position = await Position.create(req.body);
+      const position = await positionService.createPosition(req.body);
 
       await emailService.sendEmail(emailActionEnum.ADDED,req.body);
 
@@ -57,7 +38,7 @@ module.exports = {
     try {
       const {positionId} = req.params;
 
-      const position = await Position.findOneAndUpdate({_id: positionId}, req.body, {new: true});
+      const position = await positionService.updatePosition(positionId, req.body);
 
       res.json(position);
     } catch (e) {
@@ -69,16 +50,15 @@ module.exports = {
     try {
       const {positionId} = req.params;
 
-      const body = await Position.findOne({_id:positionId});
+      const body = await positionService.getById(positionId);
 
       await emailService.sendEmail(emailActionEnum.REMOVED,body);
 
-      await Position.deleteOne({positionId});
+      await positionService.deletePosition(positionId);
 
       res.sendStatus(statusCodes.NO_CONTENT);
     } catch (e) {
       next(e);
     }
   },
-
 };

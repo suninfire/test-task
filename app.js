@@ -25,10 +25,8 @@ app.use('*', (req,res,next) =>{
 
 app.use(mainErrorHandler);
 
-server.listen(PORT,() => {
-  // eslint-disable-next-line no-console
+server.listen(PORT, () => {
   console.log('App listen', PORT);
   mongoose.connect(MONGO_URL);
-
 });
 

@@ -6,34 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "start-demon": "nodemon app.js",
     "lint": "eslint --fix --ext .js ."
   },
   "dependencies": {
-    "aws-sdk": "^2.1218.0",
-    "bcrypt": "^5.0.1",
-    "dayjs": "^1.11.5",
     "dotenv": "^16.0.1",
     "email-templates": "^10.0.1",
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
     "joi": "^17.6.0",
-    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.5",
-    "morgan": "^1.10.0",
-    "node-cron": "^3.0.2",
     "nodemailer": "^6.7.8",
     "path": "^0.12.7",
-    "pug": "^3.0.2",
-    "socket.io": "^4.5.2",
-    "twilio": "^3.82.0",
-    "uuid": "^9.0.0"
+    "pug": "^3.0.2"
   },
   "devDependencies": {
-    "@types/aws-sdk": "^2.7.0",
     "@types/nodemailer": "^6.4.6",
     "eslint": "^8.23.1",
-    "eslint-plugin-node": "^11.1.0",
-    "nodemon": "^2.0.20"
+    "eslint-plugin-node": "^11.1.0"
   }
 }

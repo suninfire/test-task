@@ -1,44 +1,34 @@
 const {Router} = require('express');
 
 const {positionController} = require('../controllers');
-const {positionMdlwr,commonMdlwr} = require('../middlewares');
-
+const {commonMdlwr} = require('../middlewares');
+const {newPositionValidator,updatePositionValidator} = require('../validators/position.validator');
+const {queryParamsValidator} = require('../validators/query.validator');
 
 const positionRouter = Router();
 
 positionRouter.get(
   '/',
+  commonMdlwr.checkIsQueryValid(queryParamsValidator, 'query'),
   positionController.getAllPositions
 );
 
 positionRouter.get(
-  '/position/:positionId',
+  '/:positionId',
   commonMdlwr.checkIsIdValid('positionId' ),
   positionController.getById
 );
 
-positionRouter.get(
-  '/:level',
-  positionMdlwr.checkIsLevelValid('level'),
-  positionController.getPositionsByParams
-);
-
-positionRouter.get(
-  '/:category/:level',
-  positionMdlwr.checkIsLevelValid('level'),
-  positionMdlwr.checkIsCategoryValid('category'),
-  positionController.getPositionsByParams
-);
-
 positionRouter.post(
   '/',
-  positionMdlwr.checkIsPositionBodyValid,
-  positionController.createPosition
+  commonMdlwr.checkIsBodyValid(newPositionValidator),
+  positionController.createNewPosition
 );
 
 positionRouter.patch(
   '/:positionId',
   commonMdlwr.checkIsIdValid('positionId' ),
+  commonMdlwr.checkIsBodyValid(updatePositionValidator),
   positionController.updatePositionById
 );
 
@@ -47,6 +37,5 @@ positionRouter.delete(
   commonMdlwr.checkIsIdValid('positionId' ),
   positionController.deletePositionById
 );
-
 
 module.exports = positionRouter;

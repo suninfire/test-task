@@ -22,25 +22,18 @@
 							"port": "5005",
 							"path": [
 								"positions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get  positions by level",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:5005/positions/senior",
-							"host": [
-								"localhost"
 							],
-							"port": "5005",
-							"path": [
-								"positions",
-								"senior"
+							"query": [
+								{
+									"key": "level",
+									"value": "junior",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "react",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -52,35 +45,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:5005/positions/position/636a8109a2d438950323c835",
+							"raw": "localhost:5005/positions/636d1a4b2c62f8b7f2658bbd",
 							"host": [
 								"localhost"
 							],
 							"port": "5005",
 							"path": [
 								"positions",
-								"position",
-								"636a8109a2d438950323c835"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get  positions by level and category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:5005/positions/react/junior",
-							"host": [
-								"localhost"
-							],
-							"port": "5005",
-							"path": [
-								"positions",
-								"react",
-								"junior"
+								"636d1a4b2c62f8b7f2658bbd"
 							]
 						}
 					},
@@ -93,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category\":\"javascript\",\r\n    \"level\":\"middle\",\r\n    \"company\":\"company D\",\r\n    \"japaneseRequired\":true\r\n}",
+							"raw": "{\r\n    \"category\":\"angular\",\r\n    \"level\":\"middle\",\r\n    \"company\":\"companydssddddds\",\r\n    \"japaneseRequired\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -128,14 +100,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:5005/positions/636a1b7fac4cce02dffadb2f",
+							"raw": "localhost:5005/positions/637052eaf5a79cdbb361ae68",
 							"host": [
 								"localhost"
 							],
 							"port": "5005",
 							"path": [
 								"positions",
-								"636a1b7fac4cce02dffadb2f"
+								"637052eaf5a79cdbb361ae68"
 							]
 						}
 					},
@@ -147,14 +119,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:5005/positions/636d26defc17d03d79353cc5",
+							"raw": "localhost:5005/positions/637052eaf5a79cdbb361ae68",
 							"host": [
 								"localhost"
 							],
 							"port": "5005",
 							"path": [
 								"positions",
-								"636d26defc17d03d79353cc5"
+								"637052eaf5a79cdbb361ae68"
 							]
 						}
 					},
@@ -202,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"shabl.sergii@gmail.com\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": true,\r\n        \"level\": \"middle\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\": \"ttsesrt@gmagil.co\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": false,\r\n        \"level\": \"middle\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +204,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n         \"email\": \"shabl.serhii@gmail.com\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": true,\r\n        \"level\": \"middle\"\r\n}",
+							"raw": "{\r\n         \"email\": \"test@gmail.com\",\r\n        \"categories\": [\r\n            \"javascript\"\r\n        ],\r\n        \"japaneseKnowledge\": true,\r\n        \"level\": \"senior\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,14 +212,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:5005/applicants/636d2670fc17d03d79353cbd",
+							"raw": "localhost:5005/applicants/637041e064574ae66a51c2b7",
 							"host": [
 								"localhost"
 							],
 							"port": "5005",
 							"path": [
 								"applicants",
-								"636d2670fc17d03d79353cbd"
+								"637041e064574ae66a51c2b7"
 							]
 						}
 					},
@@ -259,14 +231,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:5005/applicants/636c1e469123c44d2b95cfa0",
+							"raw": "localhost:5005/applicants/6370218017a070ea32bc50e4",
 							"host": [
 								"localhost"
 							],
 							"port": "5005",
 							"path": [
 								"applicants",
-								"636c1e469123c44d2b95cfa0"
+								"6370218017a070ea32bc50e4"
 							]
 						}
 					},
